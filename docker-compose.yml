@@ -20,7 +20,7 @@ services:
       - hub
 
   hub:
-    image: selenium/hub:3.13.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
+    image: selenium/hub:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
     environment:
       GRID_BROWSER_TIMEOUT: 10000 # 10 seconds
       GRID_TIMEOUT: 10000
@@ -29,7 +29,7 @@ services:
       - "4444:4444"
 
   node-firefox:
-    image: selenium/node-firefox:3.13.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
+    image: selenium/node-firefox:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
     environment: &SELENIUM_NODE_ENV
       # this is a necessary workaround due to a known bug
       # https://github.com/SeleniumHQ/docker-selenium/issues/133
@@ -41,7 +41,7 @@ services:
       - hub
 
   node-chrome:
-    image: selenium/node-chrome:3.13.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
+    image: selenium/node-chrome:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
     environment:
       <<: *SELENIUM_NODE_ENV
     ports:
@@ -50,7 +50,7 @@ services:
       - hub
 
   node-chrome-debug:
-    image: selenium/node-chrome-debug:3.13.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
+    image: selenium/node-chrome-debug:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
     environment:
       <<: *SELENIUM_NODE_ENV
     ports:
@@ -59,7 +59,7 @@ services:
       - hub
 
   node-firefox-debug:
-    image: selenium/node-firefox-debug:3.13.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
+    image: selenium/node-firefox-debug:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
     environment:
       <<: *SELENIUM_NODE_ENV
     ports:

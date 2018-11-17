@@ -35,10 +35,10 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
-    rubyzip (1.2.1)
-    selenium-webdriver (3.13.0)
+    rubyzip (1.2.2)
+    selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
-      rubyzip (~> 1.2)
+      rubyzip (~> 1.2, >= 1.2.2)
     xpath (3.1.0)
       nokogiri (~> 1.8)
 
@@ -48,7 +48,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   rspec
-  selenium-webdriver (= 3.13.0)
+  selenium-webdriver (= 3.141.0)
 
 BUNDLED WITH
    1.16.2
