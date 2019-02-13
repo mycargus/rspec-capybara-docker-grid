@@ -2,4 +2,4 @@
 
 # Starts testrunner execution of all specs
 
-docker-compose run --rm --no-deps testrunner ruby grid/testrunner.rb
+docker-compose run --rm --no-deps testrunner ./scripts/execute_tests.sh
