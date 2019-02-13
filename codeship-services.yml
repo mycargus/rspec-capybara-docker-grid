@@ -1,0 +1,40 @@
+hub:
+  image: selenium/hub:3.141.0
+  environment:
+    GRID_BROWSER_TIMEOUT: 10000
+    GRID_NEW_SESSION_WAIT_TIMEOUT: 20000
+    GRID_NODE_POLLING: 300
+    GRID_TIMEOUT: 10000
+  ports:
+    - "4444"
+
+node-chrome:
+  image: selenium/node-chrome:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
+  environment: &SELENIUM_NODE_ENV
+    # this is a necessary workaround due to a known bug
+    # https://github.com/SeleniumHQ/docker-selenium/issues/133
+    HUB_PORT_4444_TCP_ADDR: hub
+    HUB_PORT_4444_TCP_PORT: 4444
+  depends_on:
+    - hub
+
+node-firefox:
+  image: selenium/node-firefox:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
+  environment:
+    <<: *SELENIUM_NODE_ENV
+  depends_on:
+    - hub
+
+testrunner:
+  build: .
+  environment:
+    APP_HOST: web:80
+    HUB_HOST: hub:4444
+  depends_on:
+    - node-chrome
+    - node-firefox
+    - hub
+    - web
+
+web:
+  image: mycargus/hello_docker_world:latest
