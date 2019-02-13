@@ -1,3 +1,5 @@
+[![Codeship Status for mycargus/rspec-capybara-docker-grid](https://app.codeship.com/projects/cde19920-1163-0137-b4bb-6e24e5bbfd47/status?branch=master)](https://app.codeship.com/projects/327276)
+
 # A Dockerized Selenium Grid with RSpec and Capybara
 
 I built this project to quickly provision an environment for running
@@ -13,7 +15,7 @@ Both RSpec and Capybara are automatically provisioned in the `testrunner` docker
 2. [homebrew package manager](http://brew.sh/)
 3. docker, docker-machine, and docker-compose: `$ brew install docker docker-machine docker-compose`
 4. optional extras to make your life easier: [dinghy](https://github.com/codekitchen/dinghy)
-   
+
 ## Dependencies (Linux)
 
 1. a copy of this repo on your machine
@@ -23,23 +25,23 @@ Both RSpec and Capybara are automatically provisioned in the `testrunner` docker
 ### A note on dinghy and dory
 
 `dinghy` and `dory` are excellent Docker utilities for MacOSX and Linux, respectively. They simplify your dockerized
-development workflow in multiple ways, perhaps the most convenient of which is this: instead of viewing your dockerized 
+development workflow in multiple ways, perhaps the most convenient of which is this: instead of viewing your dockerized
 web app in your browser with `http://$(docker-machine ip):<port>`, you can simply go to `http://myapp.docker`.
 
-_Both `dinghy` and `dory` are optional dependencies, and one may certainly use the bare-bones Docker ecosystem 
+_Both `dinghy` and `dory` are optional dependencies, and one may certainly use the bare-bones Docker ecosystem
 (and [docker-grid-rspec-capybara](https://github.com/mycargus/docker-grid-rspec-capybara)) without them._
 
 ## Setup
 
-By default this project will use [a bare-bones Sinatra web app](https://github.com/mycargus/hello_docker_world) as the 
-app under test (AUT). 
+By default this project will use [a bare-bones Sinatra web app](https://github.com/mycargus/hello_docker_world) as the
+app under test (AUT).
 
-If you'd like to see this project in action before adding your app, go ahead and skip to the 
+If you'd like to see this project in action before adding your app, go ahead and skip to the
 ["How do I execute the tests?"](https://github.com/mycargus/docker-grid-rspec-capybara/blob/master/README.md#how-do-i-execute-the-tests) section.
 
 ### Where do I add my app?
 
-Add the docker image of the AUT to the `docker-compose.yml` file under the `web` service container. 
+Add the docker image of the AUT to the `docker-compose.yml` file under the `web` service container.
 
 If you're using `dinghy` or `dory`, be sure to define the AUT's virtual URL (a default is provided). For example:
 
