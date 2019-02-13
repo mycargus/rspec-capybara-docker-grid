@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
 
@@ -6,6 +6,8 @@ services:
     image: mycargus/hello_docker_world:latest
     environment:
       VIRTUAL_HOST: hello.docker
+    networks:
+      - rspec-capybara-docker-grid-network
 
   testrunner:
     build:
@@ -15,9 +17,8 @@ services:
       HUB_HOST: hub:4444
     volumes:
       - .:/usr/src/app
-    links:
-      - web
-      - hub
+    networks:
+      - rspec-capybara-docker-grid-network
 
   hub:
     image: selenium/hub:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
@@ -29,6 +30,8 @@ services:
       VIRTUAL_HOST: selenium.hub.docker
     ports:
       - "4444:4444"
+    networks:
+      - rspec-capybara-docker-grid-network
 
   node-firefox:
     image: selenium/node-firefox:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
@@ -39,8 +42,8 @@ services:
       HUB_PORT_4444_TCP_PORT: 4444
     ports:
       - "5900:5900"
-    links:
-      - hub
+    networks:
+      - rspec-capybara-docker-grid-network
 
   node-chrome:
     image: selenium/node-chrome:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
@@ -48,8 +51,8 @@ services:
       <<: *SELENIUM_NODE_ENV
     ports:
       - "5901:5900"
-    links:
-      - hub
+    networks:
+      - rspec-capybara-docker-grid-network
 
   node-chrome-debug:
     image: selenium/node-chrome-debug:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
@@ -57,8 +60,8 @@ services:
       <<: *SELENIUM_NODE_ENV
     ports:
       - "5900:5900"
-    links:
-      - hub
+    networks:
+      - rspec-capybara-docker-grid-network
 
   node-firefox-debug:
     image: selenium/node-firefox-debug:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
@@ -66,5 +69,11 @@ services:
       <<: *SELENIUM_NODE_ENV
     ports:
       - "5901:5900"
-    links:
-      - hub
+    networks:
+      - rspec-capybara-docker-grid-network
+
+
+networks:
+  rspec-capybara-docker-grid-network:
+    driver: bridge
+    name: rspec-capybara-docker-grid-network

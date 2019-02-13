@@ -4,7 +4,7 @@
 if [ -n "$CI" ]; then
   sleep 15
 else
-  sleep 3
+  sleep 5
 fi
 
 ruby grid/testrunner.rb
