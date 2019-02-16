@@ -1,5 +1,0 @@
-- name: test
-  service: testrunner
-  environment:
-    - CI: true
-  command: ./scripts/execute_tests.sh

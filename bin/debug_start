@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Starts the Selenium hub, the app under test, and the Selenium
-# *debug* browser nodes
+# Starts the Selenium hub, the app under test, and the Selenium *debug* browser
+# nodes.
 
 ./bin/stop
 

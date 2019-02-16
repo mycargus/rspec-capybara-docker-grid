@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
-# Starts testrunner execution of all specs
+# Starts testrunner execution of all specs.
+#
+# See the 'testrunner' service config in docker-compose.yml to see which script
+# the container runs.
 
-docker-compose run --rm --no-deps testrunner ./scripts/execute_tests.sh
+docker-compose up testrunner

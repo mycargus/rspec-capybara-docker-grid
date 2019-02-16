@@ -1,8 +1,13 @@
-Dockerfile
 .dockerignore
-docker-compose.*
-
 .DS_Store
 .git
 .gitignore
 .idea
+.travis.yml
+
+Dockerfile
+docker-compose.*
+LICENSE.txt
+README.md
+
+scripts/ci/

@@ -1,4 +1,4 @@
-[![Codeship Status for mycargus/rspec-capybara-docker-grid](https://app.codeship.com/projects/cde19920-1163-0137-b4bb-6e24e5bbfd47/status?branch=master)](https://app.codeship.com/projects/327276)
+[![Build Status](https://travis-ci.org/mycargus/rspec-capybara-docker-grid.svg?branch=master)](https://travis-ci.org/mycargus/rspec-capybara-docker-grid)
 
 # A Dockerized Selenium Grid with RSpec and Capybara
 
