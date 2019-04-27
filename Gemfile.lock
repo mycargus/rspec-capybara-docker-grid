@@ -38,7 +38,7 @@ GEM
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
     rubyzip (1.2.2)
-    selenium-webdriver (3.141.5926)
+    selenium-webdriver (3.142.0)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
     xpath (3.2.0)
@@ -50,7 +50,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   rspec
-  selenium-webdriver (= 3.141.5926)
+  selenium-webdriver (= 3.142.0)
 
 BUNDLED WITH
    1.17.3
