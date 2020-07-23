@@ -5,3 +5,5 @@
 .ruby-version
 .DS_Store
 .idea
+
+docker-compose.override.yml
