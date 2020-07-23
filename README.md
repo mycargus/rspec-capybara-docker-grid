@@ -2,122 +2,135 @@
 
 # A Dockerized Selenium Grid with RSpec and Capybara
 
-I built this project to quickly provision an environment for running
-UI tests against a dockerized app. It employs a dockerized [Selenium Grid](https://github.com/SeleniumHQ/selenium/wiki/Grid2), which yields a far more cost-effective CI solution compared to purchasing and maintaining *n* dedicated machines.
+I built this project to quickly provision a dockerized environment for running
+UI tests against a dockerized app. It employs a dockerized [Selenium Grid]
+which yields a far more cost-effective CI solution compared to purchasing and
+maintaining dedicated machines.
 
-I've included bash scripts in the `/bin` directory as wrappers for the `docker-compose` commands. Hopefully, once you've completed the initial setup, you won't have to recall any docker commands. :smiley:
+I've included bash scripts in the `bin/` directory as wrappers for the
+`docker-compose` commands. Hopefully, once you've completed the initial setup,
+you won't have to recall any docker commands. :smiley:
 
-Both RSpec and Capybara are automatically provisioned in the `testrunner` docker image. As usual, you can easily customize their configurations in `spec/spec_helper.rb`.
+Both RSpec and Capybara are automatically provisioned in the `testrunner` docker
+image. You can easily customize their configurations in `spec/spec_helper.rb`.
 
-## Dependencies (OSX)
+## Dependencies
 
-1. a copy of this repo on your machine
-2. [homebrew package manager](http://brew.sh/)
-3. docker, docker-machine, and docker-compose: `$ brew install docker docker-machine docker-compose`
-4. optional extras to make your life easier: [dinghy](https://github.com/codekitchen/dinghy)
-
-## Dependencies (Linux)
-
-1. a copy of this repo on your machine
-2. [docker and docker-compose](https://docs.docker.com/engine/installation/linux/)
-3. optional extras to make your life easier: [dory](https://github.com/FreedomBen/dory)
-
-### A note on dinghy and dory
-
-`dinghy` and `dory` are excellent Docker utilities for MacOSX and Linux, respectively. They simplify your dockerized
-development workflow in multiple ways, perhaps the most convenient of which is this: instead of viewing your dockerized
-web app in your browser with `http://$(docker-machine ip):<port>`, you can simply go to `http://myapp.docker`.
-
-_Both `dinghy` and `dory` are optional dependencies, and one may certainly use the bare-bones Docker ecosystem
-(and [docker-grid-rspec-capybara](https://github.com/mycargus/docker-grid-rspec-capybara)) without them._
+- a clone of this repo on your machine
+- [Docker]
 
 ## Setup
 
-By default this project will use [a bare-bones Sinatra web app](https://github.com/mycargus/hello_docker_world) as the
-app under test (AUT).
+Here's the default workflow when writing RSpec tests in this project:
 
-If you'd like to see this project in action before adding your app, go ahead and skip to the
-["How do I execute the tests?"](https://github.com/mycargus/docker-grid-rspec-capybara/blob/master/README.md#how-do-i-execute-the-tests) section.
+- `bin/build && bin/start && bin/test`
+- make changes to files inside the spec/ directory
+- verify changes with `bin/build && bin/start && bin/test`
+
+:sadtrombone:
+
+To make your life easier, first do this:
+
+```bash
+cp docker-compose.dev.override.yml docker-compose.override.yml
+```
+
+Now any changes you make within this repo on your host file system will
+automatically show up in the `testrunner` docker container. Here's your new
+workflow:
+
+- `bin/build && bin/start && bin/test`
+- make changes to files inside the spec/ directory
+- `bin/test`
+
+:party:
+
+Some folks have reported file permission issues with this workflow, so YMMV.
 
 ### Where do I add my app?
 
-Add the docker image of the AUT to the `docker-compose.yml` file under the `web` service container.
+By default this project will use a bare-bones Sinatra web [app] as the system
+under test (SUT). If you want to replace that default web app with your own,
+open the `docker-compose.yml` file, find the `web` service configuration, and
+replace `mycargus/hello_docker_world:master` with your app's docker image label.
 
-If you're using `dinghy` or `dory`, be sure to define the AUT's virtual URL (a default is provided). For example:
+For example:
 
-```
+```yaml
 web:
-  image: my-app-under-test:latest
-  environment:
-    VIRTUAL_HOST: myapp.docker
+  image: my-app-under-test:master
 ```
 
-That was easy!
-
-If you're not sure how to create or pull a docker image, I recommend working through the official Docker tutorial located on
-their website.
+If you're not sure how to create or pull a docker image, I recommend working
+through the official Docker tutorial located on their website.
 
 ## How do I execute the tests?
 
-Start the Selenium hub, the AUT, and the Selenium browser nodes:
+Start the Selenium hub, the SUT, and the Selenium browser nodes:
 
-```sh
-$ bin/start
+```bash
+bin/start
 ```
 
 Execute the tests with Rspec and Capybara from inside the `testrunner` container:
 
-```sh
-$ bin/test
+```bash
+bin/test
 ```
 
 When you're done, stop and remove the docker containers:
 
-```sh
-$ bin/stop
+```bash
+bin/stop
 ```
 
 ## I want to see the app under test. How can I do that?
 
-Open your browser and go to http://hello.docker. Easy!
+If you're using the default web app provided, then open your browser and go to
+<http://locahost:8080>.
 
-If you changed the value of `VIRTUAL_HOST` for the web service in your
-docker-compose.yml config, then you'll want to open that URL instead.
+If you're using your own web app, make sure to expose a port in your web app's
+Dockerfile. For example, if you have `EXPOSE 9887` in your web app's Dockerfile,
+then you can view it at <http://localhost:9887>.
 
 ## Can I view the Selenium grid console?
 
-Yep! After having started the Selenium hub and nodes (`$ npm start`), open a
-browser and go to [http://selenium.hub.docker](http://selenium.hub.docker), then click the 'console' link.
+Yep! After having started the Selenium hub and nodes (`bin/start`), open a
+browser and go to <http://localhost:4444>, then click the 'console' link.
 
 ## A test is failing. How do I debug it?
 
-Start the Selenium hub, the app under test, and the Selenium *debug* browser nodes:
+Start the Selenium hub, the app under test, and the Selenium _debug_ browser
+nodes:
 
-```sh
-$ bin/debug_start
+```bash
+bin/debug_start
 ```
 
 View the chrome debug node via VNC (password: `secret`):
 
-```sh
-$ open vnc://node.chrome.debug.docker
+```bash
+open vnc://localhost:5900
 ```
 
 View the firefox debug node via VNC (password: `secret`):
 
-```sh
-$ open vnc://node.firefox.debug.docker
+```bash
+open vnc://localhost:5901
 ```
 
-Next execute the tests against the debug nodes:
+Next execute the tests against the browser nodes:
 
-```sh
-$ bin/test
+```bash
+bin/test
 ```
 
 Again, once you're finished:
 
-```sh
-$ bin/stop
+```bash
+bin/stop
 ```
 
+[app]: https://github.com/mycargus/hello_docker_world
+[docker]: https://docs.docker.com/
+[selenium grid]: https://github.com/SeleniumHQ/docker-selenium
