@@ -20,6 +20,8 @@ services:
       HUB_PORT: 4444
     ports:
       - "5901:5900"
+    volumes:
+      - /dev/shm:/dev/shm
     networks:
       - rspec-capybara-docker-grid-network
 
@@ -29,6 +31,8 @@ services:
       <<: *SELENIUM_NODE_ENV
     ports:
       - "5901:5900"
+    volumes:
+      - /dev/shm:/dev/shm
     networks:
       - rspec-capybara-docker-grid-network
 
@@ -38,6 +42,8 @@ services:
       <<: *SELENIUM_NODE_ENV
     ports:
       - "5900:5900"
+    volumes:
+      - /dev/shm:/dev/shm
     networks:
       - rspec-capybara-docker-grid-network
 
@@ -47,6 +53,8 @@ services:
       <<: *SELENIUM_NODE_ENV
     ports:
       - "5900:5900"
+    volumes:
+      - /dev/shm:/dev/shm
     networks:
       - rspec-capybara-docker-grid-network
 
