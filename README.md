@@ -119,7 +119,8 @@ View the firefox debug node via VNC (password: `secret`):
 open vnc://localhost:5901
 ```
 
-Next execute the tests against the browser nodes:
+Next execute the tests against the browser nodes and watch them run in the VNC
+window(s):
 
 ```bash
 bin/test
