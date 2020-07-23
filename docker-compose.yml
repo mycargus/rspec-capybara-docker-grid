@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   hub:
-    image: selenium/hub:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
+    image: selenium/hub:3.8.1
     environment:
       GRID_BROWSER_TIMEOUT: 10000 # 10 seconds
       GRID_NEW_SESSION_WAIT_TIMEOUT: 20000
@@ -14,28 +14,26 @@ services:
       - rspec-capybara-docker-grid-network
 
   node-chrome:
-    image: selenium/node-chrome:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
+    image: selenium/node-chrome:3.8.1
     environment: &SELENIUM_NODE_ENV
-      # this is a necessary workaround due to a known bug
-      # https://github.com/SeleniumHQ/docker-selenium/issues/133
-      HUB_PORT_4444_TCP_ADDR: hub
-      HUB_PORT_4444_TCP_PORT: 4444
+      HUB_HOST: hub
+      HUB_PORT: 4444
     ports:
       - "5901:5900"
     networks:
       - rspec-capybara-docker-grid-network
 
   node-chrome-debug:
-    image: selenium/node-chrome-debug:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
+    image: selenium/node-chrome-debug:3.8.1
     environment:
       <<: *SELENIUM_NODE_ENV
     ports:
-      - "5900:5900"
+      - "5901:5900"
     networks:
       - rspec-capybara-docker-grid-network
 
   node-firefox:
-    image: selenium/node-firefox:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
+    image: selenium/node-firefox:3.8.1
     environment:
       <<: *SELENIUM_NODE_ENV
     ports:
@@ -44,11 +42,11 @@ services:
       - rspec-capybara-docker-grid-network
 
   node-firefox-debug:
-    image: selenium/node-firefox-debug:3.141.0 # this version should match that of the selenium-webdriver gem (see Gemfile)
+    image: selenium/node-firefox-debug:3.8.1
     environment:
       <<: *SELENIUM_NODE_ENV
     ports:
-      - "5901:5900"
+      - "5900:5900"
     networks:
       - rspec-capybara-docker-grid-network
 
@@ -63,7 +61,7 @@ services:
       - rspec-capybara-docker-grid-network
 
   web:
-    image: mycargus/hello_docker_world:latest
+    image: mycargus/hello_docker_world:master
     networks:
       - rspec-capybara-docker-grid-network
 
