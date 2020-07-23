@@ -2,13 +2,16 @@
 services:
   - docker
 
+notifications:
+  email: false
+
 addons:
   apt:
     packages:
       - docker-ce
 
 env:
-  - DOCKER_COMPOSE_VERSION=1.23.2
+  - DOCKER_COMPOSE_VERSION=1.25.5
 
 before_install:
   - sudo rm /usr/local/bin/docker-compose
