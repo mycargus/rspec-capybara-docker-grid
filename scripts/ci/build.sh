@@ -2,31 +2,24 @@
 
 set -ev
 
-export COMPOSE_FILE=docker-compose.yml
-
-function cleanup()
-{
-  exit_code=$?
-
-  echo ":: Cleaning up"
-
-  docker-compose kill
-  docker-compose rm -fv
-
-  if [[ "${exit_code}" == "0" ]]; then
-    echo ":: It's working!"
-  else
-    echo ":: Build Failed :("
-  fi
-}
-
-trap cleanup INT TERM EXIT
-
 docker-compose pull
-docker-compose build --pull
+docker-compose build --pull testrunner
+
 docker-compose up -d node-chrome node-firefox hub web
 
 # wait for the selenium grid browser nodes to register with the selenium grid hub
-sleep 5
+sleep 10
 
-docker-compose up testrunner
+docker-compose run --rm testrunner && echo $?
+
+exit_code=$?
+echo "testrunner container exited with: ${exit_code}"
+
+if [[ "${exit_code}" == "0" ]]; then
+  echo ":: It's working!"
+else
+  echo ":: Test Failed :("
+  exit_code=1
+fi
+
+exit ${exit_code}
