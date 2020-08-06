@@ -5,4 +5,6 @@
 # See the 'testrunner' service config in docker-compose.yml to see which script
 # the container runs.
 
+set -e
+
 docker-compose up testrunner

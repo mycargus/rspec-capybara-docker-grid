@@ -104,7 +104,7 @@ Start the Selenium hub, the app under test, and the Selenium _debug_ browser
 nodes:
 
 ```bash
-bin/debug_start
+bin/start-debug
 ```
 
 View the chrome debug node via VNC (password: `secret`):
