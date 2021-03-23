@@ -1,0 +1,16 @@
+---
+version: 2
+updates:
+  - package-ecosystem: 'bundler'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+    commit-message:
+    # Prefix all commit messages
+    prefix: 'bundler'
+    # Specify labels for dependency pull requests
+    labels:
+      - 'bundler'
+      - 'dependencies'
+    # Set to 0 to disable version updates
+    open-pull-requests-limit: 2
