@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mycargus/rspec-capybara-docker-grid.svg?branch=master)](https://travis-ci.org/mycargus/rspec-capybara-docker-grid)
+[![Build Status](https://travis-ci.com/mycargus/rspec-capybara-docker-grid.svg?branch=master)](https://travis-ci.com/mycargus/rspec-capybara-docker-grid)
 
 # A Dockerized Selenium Grid with RSpec and Capybara
 
