@@ -1,4 +1,4 @@
-FROM instructure/ruby:2.6
+FROM instructure/ruby:2.7
 
 USER root
 
