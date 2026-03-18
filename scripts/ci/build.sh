@@ -8,7 +8,7 @@ docker compose build --pull testrunner
 docker compose up -d node-chrome node-firefox hub web
 
 # wait for the selenium grid browser nodes to register with the selenium grid hub
-sleep 10
+sleep 20
 
 docker compose run --rm testrunner && echo $?
 

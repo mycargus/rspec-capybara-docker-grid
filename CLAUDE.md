@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-A dockerized Selenium Grid test harness that runs RSpec/Capybara UI tests against a dockerized app. Tests run against both Firefox and Chrome browser nodes via Selenium Grid 3.
+A dockerized Selenium Grid test harness that runs RSpec/Capybara UI tests against a dockerized app. Tests run against both Firefox and Chrome browser nodes via Selenium Grid 4.
 
 ## Commands
 
@@ -67,4 +67,4 @@ web:
 
 ## Key Constraint
 
-`selenium-webdriver` is pinned to `3.142.7` in the Gemfile to match the Selenium Grid 3 docker images (`selenium/hub:3.8.1`, `selenium/node-*:3.8.1`). Don't upgrade either independently.
+`selenium-webdriver` is pinned to `~> 4.0` in the Gemfile to match the Selenium Grid 4 docker images (`selenium/hub:4.41.0`, `selenium/node-*:4.41.0`). When upgrading the Docker image tag, upgrade the gem to the matching 4.x version and vice versa.

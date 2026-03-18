@@ -2,4 +2,4 @@ source 'https://rubygems.org'
 
 gem 'rspec'
 gem 'capybara'
-gem 'selenium-webdriver', '3.142.7' # we pin this version to match that of the selenium docker images (see docker-compose.yml)
+gem 'selenium-webdriver', '~> 4.0' # pinned to Selenium 4.x series to match the selenium docker images (see docker-compose.yml)

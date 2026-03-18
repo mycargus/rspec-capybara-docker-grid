@@ -19,13 +19,13 @@ module Grid
       puts "############################\n\n"
 
       Capybara.register_driver :remote_browser do |app|
-        capabilities = Selenium::WebDriver::Remote::Capabilities.send(browser.to_sym)
+        options = Selenium::WebDriver::Options.send(browser.to_sym)
 
         Capybara::Selenium::Driver.new(
           app,
-          browser: browser.to_sym,
+          browser: :remote,
           url: "http://#{ENV['HUB_HOST']}/wd/hub",
-          desired_capabilities: capabilities
+          options: options
         )
       end
     end
