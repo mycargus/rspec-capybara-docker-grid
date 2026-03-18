@@ -2,15 +2,15 @@
 
 set -ev
 
-docker-compose pull
-docker-compose build --pull testrunner
+docker compose pull
+docker compose build --pull testrunner
 
-docker-compose up -d node-chrome node-firefox hub web
+docker compose up -d node-chrome node-firefox hub web
 
 # wait for the selenium grid browser nodes to register with the selenium grid hub
 sleep 10
 
-docker-compose run --rm testrunner && echo $?
+docker compose run --rm testrunner && echo $?
 
 exit_code=$?
 echo "testrunner container exited with: ${exit_code}"

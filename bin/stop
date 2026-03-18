@@ -4,4 +4,4 @@
 
 set -e
 
-docker-compose kill && docker-compose rm -vf
+docker compose kill && docker compose rm -vf

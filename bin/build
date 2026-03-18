@@ -4,4 +4,4 @@
 
 set -e
 
-docker-compose build --pull testrunner
+docker compose build --pull testrunner

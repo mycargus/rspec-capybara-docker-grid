@@ -7,7 +7,7 @@ set -e
 
 ./bin/stop
 
-docker-compose up -d hub web node-chrome-debug node-firefox-debug
+docker compose up -d hub web node-chrome-debug node-firefox-debug
 
 # wait for the selenium grid browser nodes to register with the selenium grid hub
 sleep 5
