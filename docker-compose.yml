@@ -1,5 +1,3 @@
-version: "3.7"
-
 services:
   hub:
     image: selenium/hub:3.8.1
